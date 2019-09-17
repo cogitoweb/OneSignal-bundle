@@ -1,0 +1,25 @@
+{
+    "name": "cogitoweb/onesignal-bundle",
+    "description": "Bundle to integrate in Symfony the PHP library for OneSignal provided by Tomas Norkunas",
+    "type": "symfony-bundle",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Daniele Artico",
+            "email": "daniele.artico@cogitoweb.it"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "norkunas/onesignal-php-api": "^1.13",
+        "php-http/guzzle6-adapter": "^2.0",
+        "symfony/config": "^4.3",
+        "symfony/dependency-injection": "^4.3",
+        "symfony/http-kernel": "^4.3"
+    },
+    "autoload": {
+        "psr-4": { "Cogitoweb\\OneSignalBundle\\": "src/" }
+    }
+}

@@ -1,0 +1,30 @@
+services:
+    onesignal.guzzle:
+        class:  GuzzleHttp\Client
+        public: false
+
+    onesignal.guzzle_adapter:
+        class:     Http\Adapter\Guzzle6\Client
+        arguments: [ '@onesignal.guzzle' ]
+        public:    false
+
+    onesignal.guzzle_message_factory:
+        class:  Http\Message\MessageFactory\GuzzleMessageFactory
+        public: false
+
+    onesignal.http_client:
+        class:     Http\Client\Common\HttpMethodsClient
+        arguments: [ '@onesignal.guzzle_adapter', '@onesignal.guzzle_message_factory' ]
+        public:    false
+
+    onesignal.config:
+        class: OneSignal\Config
+        calls:
+            - [ setApplicationId,      [ '%onesignal.onesignal_app_id%' ] ]
+            - [ setApplicationAuthKey, [ '%onesignal.rest_api_key%' ] ]
+            - [ setUserAuthKey,        [ '%onesignal.user_auth_key%' ] ]
+        public: false
+
+    onesignal.api:
+        class:     OneSignal\OneSignal
+        arguments: [ '@onesignal.config', '@onesignal.http_client' ]
